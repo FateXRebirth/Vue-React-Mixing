@@ -60,6 +60,16 @@
           </ol>
         </div>
 
+        <div id="computed">
+            <p>Original message: "{{ message }}"</p>
+            <p>Computed reversed message: "{{ reversedMessage }}"</p>
+        </div>
+
+        <div id="watch">{{ fullName }} {{ fullName2 }}</div>
+
+        <div id="bindClass" v-bind:class="classObject"></div>
+        <div id="bindStyle" v-bind:style="styleObject"></div>
+
         <!--  Vue's implement is come from here -->
         <script src="vue.js"></script>
 
