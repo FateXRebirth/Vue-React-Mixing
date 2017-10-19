@@ -138,7 +138,45 @@
           <button v-on:click="say('what')">Say what</button>
         </div>
 
+        <div id="form-example1">
+          <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+          <label for="jack">Jack</label>
+          <input type="checkbox" id="john" value="John" v-model="checkedNames">
+          <label for="john">John</label>
+          <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+          <label for="mike">Mike</label>
+          <br>
+          <span>Checked names: {{ checkedNames }}</span>
+        </div>
 
+        <div id="form-example2">
+            <select v-model="selected">
+              <option v-for="option in options" v-bind:value="option.value">
+                {{ option.text }}
+              </option>
+            </select>
+            <span>Selected: {{ selected }}</span>
+        </div>
+
+        <div id="example">
+          <my-component></my-component>
+        </div>
+
+        <div id="example-2">
+          <simple-counter></simple-counter>
+          <simple-counter></simple-counter>
+          <simple-counter></simple-counter>
+          <child message="hello!"></child>
+          <div id="validation"></div>
+        </div>
+
+        <div id="counter-event-example">
+          <p>{{ total }}</p>
+          <button-counter v-on:increment="incrementTotal"></button-counter>
+          <button-counter v-on:increment="incrementTotal"></button-counter>
+        </div>
+
+        <div id="test1"> {{ message }} </h1>
         <!--  Vue's implement is come from here -->
         <script src="vue.js"></script>
 

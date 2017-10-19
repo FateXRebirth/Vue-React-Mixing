@@ -259,3 +259,130 @@ new Vue({
     }
   }
 })
+
+new Vue({
+  el: '#form-example1',
+  data: {
+    checkedNames: []
+  }
+})
+
+new Vue({
+  el: '#form-example2',
+  data: {
+    selected: 'A',
+    options: [
+      { text: 'One', value: 'A' },
+      { text: 'Two', value: 'B' },
+      { text: 'Three', value: 'C' }
+    ]
+  }
+})
+
+// register
+Vue.component('my-component', {
+  template: '<div>A custom component!</div>'
+})
+// create a root instance
+new Vue({
+  el: '#example'
+})
+
+var data = { counter: 0 }
+Vue.component('simple-counter', {
+  template: '<button v-on:click="counter += 1">{{ counter }}</button>',
+  // data is technically a function, so Vue won't
+  // complain, but we return the same object
+  // reference for each component instance
+  data: function () {
+    return data
+  }
+})
+
+Vue.component('child', {
+  // declare the props
+  props: ['message'],
+  // like data, the prop can be used inside templates and
+  // is also made available in the vm as this.message
+  template: '<span>{{ message }}</span>'
+})
+
+new Vue({
+  el: '#example-2'
+})
+
+Vue.component('validation', {
+  props: {
+    // basic type check (`null` means accept any type)
+    propA: Number,
+    // multiple possible types
+    propB: [String, Number],
+    // a required string
+    propC: {
+      type: String,
+      required: true
+    },
+    // a number with default value
+    propD: {
+      type: Number,
+      default: 100
+    },
+    // object/array defaults should be returned from a
+    // factory function
+    propE: {
+      type: Object,
+      default: function () {
+        return { message: 'hello' }
+      }
+    },
+    // custom validator function
+    propF: {
+      validator: function (value) {
+        return value > 10
+      }
+    }
+  }
+})
+
+Vue.component('button-counter', {
+  template: '<button v-on:click="incrementCounter">{{ counter }}</button>',
+  data: function () {
+    return {
+      counter: 0
+    }
+  },
+  methods: {
+    incrementCounter: function () {
+      this.counter += 1
+      this.$emit('increment')
+    }
+  },
+})
+new Vue({
+  el: '#counter-event-example',
+  data: {
+    total: 0
+  },
+  methods: {
+    incrementTotal: function () {
+      this.total += 1
+    }
+  }
+})
+
+Vue.component('test2', {
+    data: function() {
+        return {
+            message: 'should be same2'
+        }
+    },
+    template: '<h1> {{ message }} </h1>'
+})
+
+new Vue({
+    el: '#test1',
+    data: {
+        message: 'should be same1'
+    },
+    template: '<h1> {{ message }} <test2> {{ message }} </test2></h1>'
+})
