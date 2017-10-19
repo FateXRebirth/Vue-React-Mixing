@@ -70,6 +70,75 @@
         <div id="bindClass" v-bind:class="classObject"></div>
         <div id="bindStyle" v-bind:style="styleObject"></div>
 
+        <div v-if="type === 'A'">
+          A
+        </div>
+        <div v-else-if="type === 'B'">
+          B
+        </div>
+        <div v-else-if="type === 'C'">
+          C
+        </div>
+        <div v-else>
+          Not A/B/C
+        </div>
+
+        <template v-if="loginType === 'username'">
+          <label>Username</label>
+          <input placeholder="Enter your username" key="username-input">
+        </template>
+        <template v-else>
+          <label>Email</label>
+          <input placeholder="Enter your email address" key="email-input">
+        </template>
+
+        <h1 v-show="ok">Hello!</h1>
+
+        <ul id="list-example1">
+          <li v-for="item in items">
+            {{ item.message }}
+          </li>
+        </ul>
+
+        <ul id="list-example2">
+          <li v-for="(item, index) in items">
+            {{ parentMessage }} - {{ index }} - {{ item.message }}
+          </li>
+        </ul>
+
+        <div id="todo-list-example">
+          <input
+            v-model="newTodoText"
+            v-on:keyup.enter="addNewTodo"
+            placeholder="Add a todo"
+          >
+          <ul>
+            <li
+              is="todo-item"
+              v-for="(todo, index) in todos"
+              v-bind:key="todo.id"
+              v-bind:title="todo.title"
+              v-on:remove="todos.splice(index, 1)"
+            ></li>
+          </ul>
+        </div>
+
+        <div id="event-example1">
+          <button v-on:click="counter += 1">Add 1</button>
+          <p>The button above has been clicked {{ counter }} times.</p>
+        </div>
+
+        <div id="event-example2">
+          <!-- `greet` is the name of a method defined below -->
+          <button v-on:click="greet">Greet</button>
+        </div>
+
+        <div id="event-example3">
+          <button v-on:click="say('hi')">Say hi</button>
+          <button v-on:click="say('what')">Say what</button>
+        </div>
+
+
         <!--  Vue's implement is come from here -->
         <script src="vue.js"></script>
 
