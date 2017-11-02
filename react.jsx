@@ -59,25 +59,61 @@ const comment = {
   }
 };
 
-function tick() {
-  const element = (
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState({
+      date: new Date()
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+}
+
+
+const element = (
     <div>
     <h1>
       Hello, {formatName(user)}!
     </h1>
-    <h2>It is {new Date().toLocaleTimeString()}.</h2>
+    <br/>
     <Welcome name="Sara" />
     <Welcome name="Cahal" />
     <Welcome name="Edite" />
+    <br/>
     <Comment
     date={comment.date}
     text={comment.text}
     author={comment.author} />
+    <br/>
+    <Clock />
+    <br/>
     </div>
-  );
-  ReactDOM.render(
+);
+
+ReactDOM.render(
     element,
     document.getElementById('root')
   );
-}
-setInterval(tick, 1000);
