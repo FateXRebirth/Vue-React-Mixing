@@ -235,6 +235,63 @@ class Page extends React.Component {
   }
 }
 
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map((number) => number * 2);
+console.log(doubled);
+
+function ListItem(props) {
+  // Correct! There is no need to specify the key here:
+  return <li>{props.value}</li>;
+}
+
+function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+    // Correct! Key should be specified inside the array.
+    <ListItem key={number.toString()}
+              value={number} />
+
+  );
+  return (
+    <ul>
+      {listItems}
+      {numbers.map((number) =>
+        <ListItem key={number.toString()}
+                  value={number} />)}
+    </ul>
+  );
+}
+
+function Blog(props) {
+  const sidebar = (
+    <ul>
+      {props.posts.map((post) =>
+        <li key={post.id}>
+          {post.title}
+        </li>
+      )}
+    </ul>
+  );
+  const content = props.posts.map((post) =>
+    <div key={post.id}>
+      <h3>{post.title}</h3>
+      <p>{post.content}</p>
+    </div>
+  );
+  return (
+    <div>
+      {sidebar}
+      <hr />
+      {content}
+    </div>
+  );
+}
+
+const posts = [
+  {id: 1, title: 'Hello World', content: 'Welcome to learning React!'},
+  {id: 2, title: 'Installation', content: 'You can install React from npm.'}
+];
+
 const element = (
     <div>
     <h1>
@@ -259,6 +316,10 @@ const element = (
     <LoginControl />
     <br/>
     <Page />
+    <br/>
+    <NumberList numbers={numbers} />
+    <br/>
+    <Blog posts={posts} />
     </div>
 );
 
