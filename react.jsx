@@ -292,6 +292,133 @@ const posts = [
   {id: 2, title: 'Installation', content: 'You can install React from npm.'}
 ];
 
+class NameForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+    console.log(event.target.value);
+  }
+
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();
+    console.log(event.target);
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Name:
+          <input type="text" value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}
+
+class Reservation extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isGoing: true,
+      numberOfGuests: 2
+    };
+
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
+  }
+
+  render() {
+    return (
+      <form>
+        <label>
+          Is going:
+          <input
+            name="isGoing"
+            type="checkbox"
+            checked={this.state.isGoing}
+            onChange={this.handleInputChange} />
+        </label>
+        <br />
+        <label>
+          Number of guests:
+          <input
+            name="numberOfGuests"
+            type="number"
+            value={this.state.numberOfGuests}
+            onChange={this.handleInputChange} />
+        </label>
+      </form>
+    );
+  }
+}
+
+class GetForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      password: '',
+    }
+    this.handleName = this.handleName.bind(this);
+    this.handlePassword = this.handlePassword.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleName(event) {
+    event.preventDefault();
+    // console.log(event.target.value);
+    this.setState({ name: event.target.value });
+  }
+  
+  handlePassword(event) {
+    event.preventDefault();
+    // console.log(event.target.value);
+    this.setState({ password: event.target.value });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    console.log(this.state);
+    console.log(this.refs);
+
+  }
+
+  render() {
+    return(
+      <form onSubmit={ this.handleSubmit } ref="form">
+        <label>
+          Name:
+          <input type="text" onChange={ this.handleName } ref="name"/>
+        </label>
+        <label>
+          Password:
+          <input type="text" onChange={ this.handlePassword } ref="password"/>
+        </label>
+        <input type="submit" value="submit" />
+      </form>
+    )
+  }
+}
+
 const element = (
     <div>
     <h1>
@@ -320,10 +447,17 @@ const element = (
     <NumberList numbers={numbers} />
     <br/>
     <Blog posts={posts} />
+    <br/>
+    <NameForm />
+    <br/>
+    <Reservation />
+    <br/>
+    <GetForm />
+    <br/>
     </div>
 );
 
 ReactDOM.render(
     element,
     document.getElementById('root')
-  );
+);
